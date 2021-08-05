@@ -25,7 +25,18 @@ describe('YouTube', () => {
   it('should render a div with a custom className', () => {
     const { container } = render(<YouTube className="custom-class" videoId="XxVg_s8xAms" />);
 
-    expect(queryByAttribute('class', container, 'custom-class')).toBeDefined();
+    expect(queryByAttribute('class', container, 'custom-class')).toBeTruthy();
+  });
+
+  it('should render a div with custom inline styles', () => {
+    const customStyles = {
+      position: 'absolute',
+    };
+
+    const { container } = render(<YouTube containerStyle={customStyles} videoId="XxVg_s8xAms" />);
+    const { firstChild } = container;
+
+    expect(firstChild.style.position).toBe('absolute');
   });
 
   it('should update an id', () => {
